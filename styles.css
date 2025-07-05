@@ -1,0 +1,173 @@
+/* Base Styles */
+:root {
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --bg-dark: #0f172a;
+    --bg-darker: #0b1120;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #2d3748;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dark mode transitions */
+body, .todo-item, input, button, select, textarea {
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Todo Items */
+.todo-item {
+    animation: fadeIn 0.3s ease-out forwards;
+    background-color: var(--bg-card);
+    border-left: 4px solid var(--primary);
+    margin: 0.5rem 0;
+    border-radius: 0.375rem;
+    padding: 1rem;
+}
+
+.todo-item:hover {
+    background-color: #1e3a8a20;
+}
+
+/* Checkbox styles */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #2d3748;
+    border: 2px solid #4a5568;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--primary);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Completed todo */
+.completed {
+    text-decoration: line-through;
+    color: #64748b;
+    opacity: 0.8;
+}
+
+/* Buttons */
+button {
+    transition: all 0.2s ease-in-out;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"] {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: var(--text-primary);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .todo-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 0.5rem;
+    }
+    
+    .todo-actions button {
+        margin-top: 0.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .todo-actions {
+        width: 100%;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+}
